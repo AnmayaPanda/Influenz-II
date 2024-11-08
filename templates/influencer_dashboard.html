@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}Influencer Dashboard{% endblock %}
+{% block content %}
+<h2>Influencer Dashboard</h2>
+<h3>Ad Requests</h3>
+<ul>
+    {% for ad_request in ad_requests %}
+    <li>
+        {{ ad_request.campaign.name }} - {{ ad_request.requirements }} - {{ ad_request.status }}
+        {% if ad_request.status == 'Pending' %}
+        <form action="/take_action/{{ ad_request.id }}/accept" method="POST" style="display: inline;">
+            <button type="submit" class="btn btn-sm btn-success">Accept</button>
+        </form>
+        <form action="/take_action/{{ ad_request.id }}/reject" method="POST" style="display: inline;">
+            <button type="submit" class="btn btn-sm btn-danger">Reject</button>
+        </form>
+        <form action="/take_action/{{ ad_request.id }}/negotiate" method="POST" style="display: inline;">
+            <input type="number" name="payment_amount" step="0.01" required>
+            <button type="submit" class="btn btn-sm btn-warning">Negotiate</button>
+        </form>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}Search Influencers{% endblock %}
+{% block content %}
+<h2>Search Influencers</h2>
+<form method="POST">
+    <div class="form-group">
+        <label for="niche">Niche</label>
+        <input type="text" class="form-control" id="niche" name="niche">
+    </div>
+    <div class="form-group">
+        <label for="min_reach">Minimum Reach</label>
+        <input type="number" class="form-control" id="min_reach" name="min_reach">
+    </div>
+    <div class="form-group">
+        <label for="max_reach">Maximum Reach</label>
+        <input type="number" class="form-control" id="max_reach" name="max_reach">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<h3>Results</h3>
+<ul>
+    {% for influencer in influencers %}
+    <li>{{ influencer.user.username }} - Niche: {{ influencer.niche }}, Reach: {{ influencer.reach }}</li>
+    {% else %}
+    <li>No influencers found.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

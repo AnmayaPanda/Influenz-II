@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block title %}Search Campaigns{% endblock %}
+{% block content %}
+<h2>Search Campaigns</h2>
+<ul>
+    {% for campaign in campaigns %}
+    <li>{{ campaign.name }} - {{ campaign.description }} - Budget: {{ campaign.budget }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

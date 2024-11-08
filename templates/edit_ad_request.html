@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block title %}Edit Ad Request{% endblock %}
+{% block content %}
+<h2>Edit Ad Request for {{ ad_request.campaign.name }}</h2>
+<form method="POST">
+    <label for="influencer_id">Select Influencer:</label>
+    <select name="influencer_id" required>
+        {% for influencer in influencers %}
+        <option value="{{ influencer.id }}" {% if influencer.id == ad_request.influencer_id %}selected{% endif %}>
+            {{ influencer.user.username }} ({{ influencer.category }})
+        </option>
+        {% endfor %}
+    </select>
+    <label for="requirements">Requirements:</label>
+    <textarea name="requirements" required>{{ ad_request.requirements }}</textarea>
+    <label for="payment_amount">Payment Amount:</label>
+    <input type="number" name="payment_amount" step="0.01" value="{{ ad_request.payment_amount }}" required>
+    <label for="status">Status:</label>
+    <select name="status" required>
+        <option value="Pending" {% if ad_request.status == 'Pending' %}selected{% endif %}>Pending</option>
+        <option value="Accepted" {% if ad_request.status == 'Accepted' %}selected{% endif %}>Accepted</option>
+        <option value="Rejected" {% if ad_request.status == 'Rejected' %}selected{% endif %}>Rejected</option>
+    </select>
+    <button type="submit">Update Ad Request</button>
+</form>
+{% endblock %}
